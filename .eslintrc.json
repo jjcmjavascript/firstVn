@@ -8,6 +8,18 @@
   ],
   "rules": {
     // Puedes agregar o modificar las reglas aquí según tus necesidades
-    // "vue/no-unused-vars": "error"
+    "vue/no-unused-vars": "error",
+    "complexity": [
+      "error",
+      {
+        "max": 3
+      }
+    ],
+    "max-depth": [
+      "error",
+      {
+        "max": 3
+      }
+    ]
   }
 }
