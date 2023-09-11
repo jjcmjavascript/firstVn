@@ -1,25 +1,11 @@
 {
-  "env": {
-    "node": true
-  },
-  "extends": [
-    "eslint:recommended",
-    "plugin:vue/vue3-recommended"
-  ],
-  "rules": {
-    // Puedes agregar o modificar las reglas aquí según tus necesidades
-    "vue/no-unused-vars": "error",
-    "complexity": [
-      "error",
-      {
-        "max": 3
-      }
-    ],
-    "max-depth": [
-      "error",
-      {
-        "max": 3
-      }
-    ]
-  }
+    "env": {
+        "browser": true,
+        "es2021": true
+    },
+    "extends": "standard",
+    "parserOptions": {
+        "ecmaVersion": "latest",
+        "sourceType": "module"
+    }
 }
