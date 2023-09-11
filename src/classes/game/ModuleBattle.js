@@ -1,0 +1,4 @@
+class ModuleBattle {
+  constructor() {
+  }
+}
