@@ -5,10 +5,30 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite + Vue</title>
+    <style>
+      html,body {
+        margin: 0;
+        padding: 0;
+        font-family: sans-serif;
+        font-size: 16px;
+        background-color: black;
+      }
+      #app {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      canvas {
+        width: 80vw;
+        height: 90vh;
+        display: block;
+        border: 1px solid white;
+      }
+    </style>
   </head>
   <body>
     <div id="app">
-      Mi visual novel
+     <canvas id="canvas"></canvas>
     </div>
     <script type="module" src="/main.js"></script>
   </body>
