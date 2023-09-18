@@ -17,7 +17,6 @@ class Square {
     this.color = color
     this.lineWidth = lineWidth
     this.fill = fill
-    this.radius = radius
     this.lineColor = lineColor
   }
 

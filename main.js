@@ -15,6 +15,17 @@ import ImageMaker from '@class/ImageMaker'
     ...canvasManager.gameSectionDimesions
   })
 
+  setTimeout(async () => {
+    const image = await ImageMaker.getImage({ url: 'https://mlstaticquic-a.akamaihd.net/pollas-ponedoras-coloradas-o-color-negro-raza-secling-D_NQ_NP_710466-MLU26013344089_092017-F.jpg' })
+
+    canvasManager.insertImage({
+      image,
+      x: 0,
+      y: 0,
+      ...canvasManager.gameSectionDimesions
+    })
+  }, 5000)
+
   const circle = new Circle({
     ...canvasManager.buttonSectionPosition,
     radius: 20,
