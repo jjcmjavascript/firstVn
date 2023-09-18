@@ -5,8 +5,8 @@ export default defineConfig({
   plugins: [eslintPlugin()],
   resolve: {
     alias: {
-      '@class': '/class',
-      '@game': '/class/game'
+      '@class': '/src/class',
+      '@game': '/src/class/game'
     }
   }
 })
