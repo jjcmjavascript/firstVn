@@ -28,6 +28,13 @@ class CanvasManager {
     }
   }
 
+  get buttonSectionPosition () {
+    return {
+      x: this.canvas.width * 0.7,
+      y: this.gameSectionDimesions.height
+    }
+  }
+
   insertImage ({ image, x = 0, y = 0, width = 0, height = 0 }) {
     this.context.drawImage(image, x, y, width, height)
   }
