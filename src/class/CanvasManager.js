@@ -38,6 +38,12 @@ class CanvasManager {
   insertImage ({ image, x = 0, y = 0, width = 0, height = 0 }) {
     this.context.drawImage(image, x, y, width, height)
   }
+
+  reset () {
+    this.context.lineWidth = 0
+    this.context.fillStyle = 'black'
+    this.context.strokeStyle = 'black'
+  }
 }
 
 export const canvasManager = new CanvasManager()

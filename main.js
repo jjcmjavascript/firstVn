@@ -1,6 +1,7 @@
 import Game from '@game/Game'
 import { canvasManager } from '@class/CanvasManager'
 import Circle from '@class/Circle'
+import Square from '@class/Square'
 import ImageMaker from '@class/ImageMaker'
 
 (async function () {
@@ -17,19 +18,38 @@ import ImageMaker from '@class/ImageMaker'
   const circle = new Circle({
     ...canvasManager.buttonSectionPosition,
     radius: 20,
-    lineWidth: 5,
-    color: 'red'
+    lineWidth: 2,
+    lineColor: 'red'
   })
 
-  const otherCircle = new Circle({
+  const circle2 = new Circle({
     x: canvasManager.buttonSectionPosition.x + 100,
     y: canvasManager.buttonSectionPosition.y,
     radius: 20,
-    lineWidth: 5,
+    fill: true,
     color: 'blue'
   })
 
-  circle.draw(canvasManager.context)
-  otherCircle.draw(canvasManager.context)
+  const square = new Square({
+    ...canvasManager.buttonSectionPosition,
+    width: 50,
+    height: 50,
+    fill: true,
+    color: 'green'
+  })
+
+  const square2 = new Square({
+    x: canvasManager.buttonSectionPosition.x + 100,
+    y: canvasManager.buttonSectionPosition.y,
+    width: 50,
+    height: 50,
+    fill: true,
+    color: 'yellow'
+  })
+
+  circle.draw(canvasManager)
+  circle2.draw(canvasManager)
+  square.draw(canvasManager)
+  square2.draw(canvasManager)
   console.log(game)
 })()
