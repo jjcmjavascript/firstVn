@@ -8,7 +8,8 @@ class Square {
     lineColor = 'black',
     lineWidth = 0,
     fill = false,
-    radius = 0
+    radius = 0,
+    text = null
   }) {
     this.x = x
     this.y = y
@@ -18,6 +19,7 @@ class Square {
     this.lineWidth = lineWidth
     this.fill = fill
     this.lineColor = lineColor
+    this.text = text
   }
 
   setX (x) {
@@ -60,20 +62,30 @@ class Square {
     return this
   }
 
-  withLine (context) {
+  withLine (manager) {
     if (this.lineWidth > 0) {
-      context.lineWidth = this.lineWidth
-      context.strokeStyle = this.lineColor
-      context.stroke()
+      manager.context.lineWidth = this.lineWidth
+      manager.context.strokeStyle = this.lineColor
+      manager.context.stroke()
     }
 
     return this
   }
 
-  withFill (context) {
+  withFill (manager) {
     if (this.fill) {
-      context.fillStyle = this.color
-      context.fill()
+      manager.context.fillStyle = this.color
+      manager.context.fill()
+    }
+
+    return this
+  }
+
+  withText (manager, x, y) {
+    if (this.text) {
+      x && this.text.setX(x)
+      y && this.text.setY(y)
+      this.text.draw(manager)
     }
 
     return this
@@ -83,8 +95,9 @@ class Square {
     manager.context.beginPath()
     manager.context.rect(this.x, this.y, this.width, this.height)
 
-    this.withLine(manager.context)
-    this.withFill(manager.context)
+    this.withLine(manager)
+    this.withFill(manager)
+    this.withText(manager, this.x, this.y)
 
     manager.reset()
     manager.context.closePath()

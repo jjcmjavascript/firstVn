@@ -9,7 +9,8 @@ class Circle {
     fill = false,
     color = 'black',
     lineWidth = 1,
-    lineColor = 'black'
+    lineColor = 'black',
+    text = null
 
   }) {
     this.x = x
@@ -22,6 +23,7 @@ class Circle {
     this.fill = fill
     this.color = color
     this.lineColor = lineColor
+    this.text = text
   }
 
   setX (x) {
@@ -64,20 +66,35 @@ class Circle {
     return this
   }
 
-  withFill (context) {
+  setText (text) {
+    this.text = text
+    return this
+  }
+
+  withFill (manager) {
     if (this.fill) {
-      context.fillStyle = this.color
-      context.fill()
+      manager.context.fillStyle = this.color
+      manager.context.fill()
     }
 
     return this
   }
 
-  withLine (context) {
+  withLine (manager) {
     if (this.lineWidth > 0) {
-      context.lineWidth = this.lineWidth
-      context.strokeStyle = this.lineColor
-      context.stroke()
+      manager.context.lineWidth = this.lineWidth
+      manager.context.strokeStyle = this.lineColor
+      manager.context.stroke()
+    }
+
+    return this
+  }
+
+  withText (manager, x, y) {
+    if (this.text) {
+      x && this.text.setX(x)
+      y && this.text.setY(y)
+      this.text.draw(manager)
     }
 
     return this
@@ -87,7 +104,7 @@ class Circle {
     manager.context.beginPath()
     manager.context.arc(this.x, this.y, this.radius, this.startAngle, this.endAngle, this.anticlockwise)
 
-    this.withFill(manager.context).withLine(manager.context)
+    this.withFill(manager).withLine(manager).withText(manager, this.x, this.y)
 
     manager.reset()
     manager.context.closePath()

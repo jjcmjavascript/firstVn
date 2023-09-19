@@ -39,6 +39,10 @@ class CanvasManager {
     this.context.drawImage(image, x, y, width, height)
   }
 
+  insertMainImage ({ image }) {
+    this.context.drawImage(image, 0, 0, this.gameSectionDimesions.width, this.gameSectionDimesions.height)
+  }
+
   reset () {
     this.context.lineWidth = 0
     this.context.fillStyle = 'black'
@@ -46,4 +50,6 @@ class CanvasManager {
   }
 }
 
-export const canvasManager = new CanvasManager()
+const canvasManager = new CanvasManager()
+
+export default canvasManager

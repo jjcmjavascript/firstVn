@@ -1,36 +1,26 @@
 import Game from '@game/Game'
-import { canvasManager } from '@class/CanvasManager'
-import Circle from '@class/Circle'
-import Square from '@class/Square'
+import canvasManager from '@canvas/CanvasManager'
+import Circle from '@canvas/Circle'
+import Square from '@canvas/Square'
 import ImageMaker from '@class/ImageMaker'
+import Text from '@canvas/Text'
 
 (async function () {
   const game = new Game()
   const image = await ImageMaker.getImage({ url: 'https://www.pngall.com/wp-content/uploads/1/Forest-PNG-HD.png' })
 
-  canvasManager.insertImage({
-    image,
-    x: 20,
-    y: 20,
-    ...canvasManager.gameSectionDimesions
+  canvasManager.insertMainImage({ image })
+
+  const helloText = new Text({
+    text: 'Hola bb'
   })
-
-  setTimeout(async () => {
-    const image = await ImageMaker.getImage({ url: 'https://mlstaticquic-a.akamaihd.net/pollas-ponedoras-coloradas-o-color-negro-raza-secling-D_NQ_NP_710466-MLU26013344089_092017-F.jpg' })
-
-    canvasManager.insertImage({
-      image,
-      x: 0,
-      y: 0,
-      ...canvasManager.gameSectionDimesions
-    })
-  }, 5000)
 
   const circle = new Circle({
     ...canvasManager.buttonSectionPosition,
     radius: 20,
     lineWidth: 2,
-    lineColor: 'red'
+    lineColor: 'red',
+    text: helloText
   })
 
   const circle2 = new Circle({
@@ -54,8 +44,9 @@ import ImageMaker from '@class/ImageMaker'
     y: canvasManager.buttonSectionPosition.y,
     width: 50,
     height: 50,
-    fill: true,
-    color: 'yellow'
+    lineWidth: 2,
+    lineColor: 'yellow',
+    text: helloText
   })
 
   circle.draw(canvasManager)
