@@ -48,6 +48,10 @@ class CanvasManager {
     this.context.fillStyle = 'black'
     this.context.strokeStyle = 'black'
   }
+
+  clearRect () {
+    this.context.clearRect(0, 0, this.canvas.width, this.canvas.height)
+  }
 }
 
 const canvasManager = new CanvasManager()

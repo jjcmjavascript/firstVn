@@ -19,8 +19,7 @@ import Text from '@canvas/Text'
     ...canvasManager.buttonSectionPosition,
     radius: 20,
     lineWidth: 2,
-    lineColor: 'red',
-    text: helloText
+    lineColor: 'red'
   })
 
   const circle2 = new Circle({
@@ -54,4 +53,15 @@ import Text from '@canvas/Text'
   square.draw(canvasManager)
   square2.draw(canvasManager)
   console.log(game)
+
+  const move = () => {
+    requestAnimationFrame(move)
+
+    canvasManager.clearRect()
+    canvasManager.insertMainImage({ image })
+    circle.move({ manager: canvasManager, x: 1, y: 1 })
+    circle2.move({ manager: canvasManager, x: 1, y: 1 })
+  }
+
+  move()
 })()

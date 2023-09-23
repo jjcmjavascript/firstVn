@@ -109,6 +109,12 @@ class Circle {
     manager.reset()
     manager.context.closePath()
   }
+
+  move ({ manager, x, y }) {
+    this.x += x
+    this.y += y
+    this.draw(manager)
+  }
 }
 
 export default Circle
