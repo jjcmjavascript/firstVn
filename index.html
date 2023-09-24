@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite + Vue</title>
     <style>
-      html,body,#app {
+      html,body {
         margin: 0;
         padding: 0;
         font-family: sans-serif;
@@ -16,17 +16,28 @@
         justify-content: center;
         align-items: center;
         height: 100%;
-        width: 100%
+        width: 100%;
+        overflow: hidden;
       }
 
       canvas {
         display: block;
-        border: 1px solid white;
+        background-color: white;
+      }
+
+      input {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        z-index: 1;
       }
     </style>
   </head>
   <body>
     <div id="app">
+      <div>
+        <input type="text" style="width: 100%">
+      </div>
      <canvas id="canvas"></canvas>
     </div>
     <script type="module" src="/main.js"></script>

@@ -1,9 +1,9 @@
 class CanvasManager {
-  constructor () {
-    this.canvas = document.getElementById('canvas')
+  constructor ({ htmlCanvas = null }) {
+    this.canvas = htmlCanvas
     this.context = this.canvas.getContext('2d')
-    this.canvas.width = window.innerWidth * 0.9
-    this.canvas.height = window.innerHeight * 0.9
+    this.canvas.width = window.innerWidth
+    this.canvas.height = window.innerHeight
   }
 
   get height () {
@@ -30,7 +30,7 @@ class CanvasManager {
 
   get buttonSectionPosition () {
     return {
-      x: this.canvas.width * 0.7,
+      x: this.canvas.width * 0.8,
       y: this.gameSectionDimesions.height
     }
   }
@@ -47,6 +47,7 @@ class CanvasManager {
     this.context.lineWidth = 0
     this.context.fillStyle = 'black'
     this.context.strokeStyle = 'black'
+    this.context.moveTo(0, 0)
   }
 
   clearRect () {
@@ -54,6 +55,4 @@ class CanvasManager {
   }
 }
 
-const canvasManager = new CanvasManager()
-
-export default canvasManager
+export default CanvasManager

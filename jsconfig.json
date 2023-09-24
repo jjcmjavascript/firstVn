@@ -1,9 +1,12 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
-    "target": "es6",
+    "baseUrl": "./",
     "paths": {
-      "@/*": ["./src/*"],
+      "@class/*": ["src/class/*"],
+      "@game/*": ["src/class/game/*"],
+      "@canvas/*": ["src/class/canvas/*"],
+      "@utils/*": ["src/utils/*"],
     }
-  }
+  },
+  "exclude": ["node_modules", "dist"]
 }
