@@ -3,11 +3,12 @@ import CanvasListeners from '@canvas/CanvasListeners'
 import ImageMaker from '@class/ImageMaker'
 import AudioMaker from '@class/AudioMaker'
 import colors from '@utils/colors'
-import MenuSectionDraw from '@class/canvas/MenuSectionDraw'
-import LeftButtonDraw from '@class/canvas/LeftButtonDraw'
+import MenuSectionDraw from '@canvas/MenuSectionDraw'
+import LeftButtonDraw from '@canvas/LeftButtonDraw'
 import Star from '@class/canvas/StarDraw'
 import Text from '@canvas/Text'
 import Loading from '@canvas/Loading'
+import RightButtonDraw from '@canvas/RightButtonDraw'
 
 (async function () {
   let resourcesLoaded = false
@@ -46,6 +47,7 @@ import Loading from '@canvas/Loading'
   })
   const menuSection = new MenuSectionDraw({ canvasManager, colors })
   const leftButton = new LeftButtonDraw({ canvasManager, colors })
+  const rightButtonDraw = new RightButtonDraw({ canvasManager, colors })
   const starts = new Array(30).fill(0).map(() => new Star({
     canvasManager,
     x: Math.random() * canvasManager.width,
@@ -76,6 +78,7 @@ import Loading from '@canvas/Loading'
   /*          Main Loop             */
   /*          Draw                  */
   /**********************************/
+  const ctx = canvasManager.context
   const draw = () => {
     requestAnimationFrame(draw)
     canvasManager.clearRect()
@@ -88,6 +91,7 @@ import Loading from '@canvas/Loading'
 
       menuSection.draw()
       leftButton.draw()
+      rightButtonDraw.draw()
     }
   }
 
