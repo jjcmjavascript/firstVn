@@ -5,7 +5,7 @@ class RightButtonDraw {
   }
 
   get initialX () {
-    return this.canvasManager.buttonSectionPosition.x + 100
+    return this.canvasManager.buttonSectionPosition.x + this.canvasManager.buttonSectionPosition.x * 0.05
   }
 
   get initialY () {
@@ -16,14 +16,18 @@ class RightButtonDraw {
     const canvasX = clientX - this.canvasManager.canvas.getBoundingClientRect().left
     const canvasY = clientY - this.canvasManager.canvas.getBoundingClientRect().top
 
-    // Coordenadas del área del botón triangular
+    // Coordenadas del área del botón
     const initialX = this.initialX
     const initialY = this.initialY
     const incresePosition = this.canvasManager.buttonSectionPosition.x * 0.02
+    const topLeftCoordX = initialX - incresePosition
+    const topLeftCoordY = initialY
+    const bottomLeftCoordX = initialX + (incresePosition / 2) // divido entre dos para envitar que el botón sea muy grande
+    const bottomLeftCoordY = initialY + incresePosition * 2
 
     // Usar un algoritmo de punto dentro del polígono (triángulo)
-    const pointInside = (canvasX >= initialX && canvasX <= initialX + incresePosition &&
-                         canvasY >= initialY && canvasY <= initialY + incresePosition)
+    const pointInside = (canvasX >= topLeftCoordX && canvasX <= bottomLeftCoordX &&
+                         canvasY >= topLeftCoordY && canvasY <= bottomLeftCoordY)
 
     return pointInside
   }
@@ -43,9 +47,8 @@ class RightButtonDraw {
     ctx.strokeStyle = this.colors.siverTwo
     ctx.lineWidth = 1
     ctx.fillStyle = this.colors.purpleThree
-    ctx.fill()
+    // ctx.fill()
     ctx.stroke()
-    ctx.fill()
     ctx.closePath()
   }
 }

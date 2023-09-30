@@ -24,7 +24,7 @@ import RightButtonDraw from '@canvas/RightButtonDraw'
   /****************************/
   Promise.all([
     ImageMaker.load({ url: 'https://www.pngall.com/wp-content/uploads/1/Forest-PNG-HD.png' }),
-    ImageMaker.load({ url: 'https://www.cedior.com/wp-content/uploads/2018/09/pollo-uva.jpg' }),
+    ImageMaker.load({ url: 'https://wallpaperaccess.com/full/1616642.jpg' }),
     AudioMaker.load({ url: 'http://www.sonidosmp3gratis.com/sounds/Door_Open_With_Squeak_02_Sound_Effect_Mp3_136.mp3' })
   ])
     .then((result) => {
@@ -47,7 +47,7 @@ import RightButtonDraw from '@canvas/RightButtonDraw'
   })
   const menuSection = new MenuSectionDraw({ canvasManager, colors })
   const leftButton = new LeftButtonDraw({ canvasManager, colors })
-  const rightButtonDraw = new RightButtonDraw({ canvasManager, colors })
+  const rightButton = new RightButtonDraw({ canvasManager, colors })
   const starts = new Array(30).fill(0).map(() => new Star({
     canvasManager,
     x: Math.random() * canvasManager.width,
@@ -62,7 +62,7 @@ import RightButtonDraw from '@canvas/RightButtonDraw'
   })
 
   canvasListeners.addListener({
-    name: 'previous',
+    name: 'mousemove',
     type: 'mousemove',
     callback: function (event) {
       const result = leftButton.mouseInside({
@@ -71,6 +71,26 @@ import RightButtonDraw from '@canvas/RightButtonDraw'
       })
 
       input.value = `X: ${event.clientX - canvasManager.canvas.getBoundingClientRect().left} Y: ${event.clientY - canvasManager.canvas.getBoundingClientRect().top}`
+    }
+  })
+
+  canvasListeners.addListener({
+    name: 'click',
+    type: 'click',
+    callback: function (event) {
+      if (leftButton.mouseInside({
+        clientX: event.clientX,
+        clientY: event.clientY
+      })) {
+        console.error('leftButton button')
+      }
+
+      if (rightButton.mouseInside({
+        clientX: event.clientX,
+        clientY: event.clientY
+      })) {
+        console.error('rightButton button')
+      }
     }
   })
 
@@ -91,7 +111,7 @@ import RightButtonDraw from '@canvas/RightButtonDraw'
 
       menuSection.draw()
       leftButton.draw()
-      rightButtonDraw.draw()
+      rightButton.draw()
     }
   }
 
