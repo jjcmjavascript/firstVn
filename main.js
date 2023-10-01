@@ -9,10 +9,12 @@ import Loading from '@canvas/Loading'
 import RightButtonDraw from '@canvas/RightButtonDraw'
 import Game from '@game/Game'
 import ModuleFactory from '@game/ModuleFactory'
+import AudioMaker from '@class/AudioMaker'
 
 (async function () {
   let resourcesLoaded = false
   let game = null
+  let clickSound = null
   const input = document.querySelector('input')
   const canvasManager = new CanvasManager({
     htmlCanvas: document.getElementById('canvas')
@@ -26,7 +28,11 @@ import ModuleFactory from '@game/ModuleFactory'
   })
     .then((gameInstance) => {
       game = gameInstance
-      resourcesLoaded = true
+      AudioMaker.load({ url: 'http://sonidosmp3gratis.com/sounds/button-click-off-click.mp3' })
+        .then((audio) => {
+          clickSound = audio
+          resourcesLoaded = true
+        })
     })
 
   // sections and items
@@ -68,7 +74,7 @@ import ModuleFactory from '@game/ModuleFactory'
   canvasListeners.addListener({
     name: 'click',
     type: 'click',
-    callback: function (event) {
+    callback: async function (event) {
       if (leftButton.mouseInside({
         clientX: event.clientX,
         clientY: event.clientY
@@ -80,7 +86,10 @@ import ModuleFactory from '@game/ModuleFactory'
         clientX: event.clientX,
         clientY: event.clientY
       })) {
-        game.nextModule()
+        clickSound.pause()
+        clickSound.currentTime = 0
+        clickSound.play()
+        await game.nextModule()
       }
     }
   })
