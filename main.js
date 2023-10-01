@@ -80,7 +80,6 @@ import ModuleFactory from '@game/ModuleFactory'
         clientX: event.clientX,
         clientY: event.clientY
       })) {
-        game.stopCurrentModule()
         game.nextModule()
       }
     }

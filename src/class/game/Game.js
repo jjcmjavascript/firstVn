@@ -17,7 +17,7 @@ class Game {
   }
 
   async stopCurrentModule () {
-    this.currentModule.stop()
+    await this.currentModule.stop()
   }
 
   async pushModule ({ id }) {
@@ -31,6 +31,7 @@ class Game {
     if (!this.currentModule.texts?.isFinished) {
       this.currentModule.texts.next()
     } else if (nextModuleId) {
+      await this.stopCurrentModule()
       await this.pushModule({ id: nextModuleId })
     }
   }
