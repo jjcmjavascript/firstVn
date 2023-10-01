@@ -47,7 +47,7 @@ class RightButtonDraw {
     ctx.strokeStyle = this.colors.siverTwo
     ctx.lineWidth = 1
     ctx.fillStyle = this.colors.purpleThree
-    // ctx.fill()
+    ctx.fill()
     ctx.stroke()
     ctx.closePath()
   }

@@ -35,7 +35,36 @@ class CanvasManager {
     }
   }
 
+  getWidth ({ width }) {
+    const isNumber = typeof width === 'number'
+
+    return !isNumber ? (this.canvas.width * width.replace('%', '').trim()) / 100 : width
+  }
+
+  getHeight ({ height }) {
+    const isNumber = typeof height === 'number'
+
+    return !isNumber ? (this.canvas.height * height.replace('%', '').trim()) / 100 : height
+  }
+
+  getX ({ x }) {
+    const isNumber = typeof x === 'number'
+
+    return !isNumber ? (this.canvas.width * x.replace('%', '').trim()) / 100 : x
+  }
+
+  getY ({ y }) {
+    const isNumber = typeof y === 'number'
+
+    return !isNumber ? (this.canvas.height * y.replace('%', '').trim()) / 100 : y
+  }
+
   insertImage ({ image, x = 0, y = 0, width = 0, height = 0 }) {
+    width = this.getWidth({ width })
+    height = this.getHeight({ height })
+    x = this.getX({ x })
+    y = this.getY({ y })
+
     this.context.drawImage(image, x, y, width, height)
   }
 

@@ -6,6 +6,7 @@
       "@game/*": ["src/class/game/*"],
       "@canvas/*": ["src/class/canvas/*"],
       "@utils/*": ["src/utils/*"],
+      "@constans/*": ["src/constans/*"],
     }
   },
   "exclude": ["node_modules", "dist"]

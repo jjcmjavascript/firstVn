@@ -13,7 +13,7 @@ class Loading {
     if (this.text) {
       this.text.setX(this.canvasManager.width / 2)
       this.text.setY(this.canvasManager.height / 2)
-      this.text.draw(this.canvasManager)
+      this.text.draw({ manager: this.canvasManager })
     }
   }
 

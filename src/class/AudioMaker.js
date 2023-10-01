@@ -8,10 +8,10 @@ class AudioMaker {
           resolve(audio)
         }
         audio.onerror = (err) => {
-          reject(new Error(`Audio: ${err}`))
+          reject(new Error(`Audio: ${err.message}`))
         }
       } catch (err) {
-        reject(new Error(`Audio: ${err}`))
+        reject(new Error(`Audio: ${err.message}`))
       }
     })
   }

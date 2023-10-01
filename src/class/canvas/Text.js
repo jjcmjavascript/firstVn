@@ -8,7 +8,8 @@ class Text {
     font = 'Arial',
     textBaseline = 'middle',
     stroke = false,
-    fillStyle = 'white'
+    fillStyle = 'white',
+    manager
   }) {
     this.text = text
     this.x = x
@@ -19,6 +20,7 @@ class Text {
     this.stroke = stroke
     this.fillStyle = fillStyle
     this.size = size
+    this.manager = manager
   }
 
   get fontFormat () {
@@ -60,7 +62,7 @@ class Text {
     return this
   }
 
-  draw (manager) {
+  draw ({ manager = this.manager }) {
     manager.context.textAlign = this.textAlignment
     manager.context.font = this.fontFormat
     manager.context.textBaseline = this.textBaseline

@@ -9,7 +9,8 @@ export default defineConfig({
       '@class': path.resolve(__dirname, 'src/class'),
       '@game': path.resolve(__dirname, 'src/class/game'),
       '@canvas': path.resolve(__dirname, 'src/class/canvas'),
-      '@utils': path.resolve(__dirname, 'src/utils')
+      '@utils': path.resolve(__dirname, 'src/utils'),
+      '@constans': path.resolve(__dirname, 'src/constans')
     }
   }
 })
