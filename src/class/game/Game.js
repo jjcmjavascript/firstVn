@@ -28,6 +28,7 @@ class Game {
 
   async nextModule () {
     const nextModuleId = this.currentModule.next
+
     if (!this.currentModule.texts?.isFinished) {
       this.currentModule.texts.next()
     } else if (nextModuleId) {

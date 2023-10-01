@@ -7,35 +7,7 @@ import GameImageSelector from '@game/GameImageSelector'
 import GameAudioSelector from '@game/GameAudioSelector'
 import ImageMaker from '@class/ImageMaker'
 import AudioMaker from '@class/AudioMaker'
-
-export const moduleType = {
-  general: Symbol('general'),
-  battle: Symbol('battle'),
-  options: Symbol('options')
-}
-
-export const schemes = [
-  {
-    id: 1,
-    name: 'initialOne',
-    type: moduleType.general,
-    texts: 'INITIAL_TEXT',
-    images: 'INITIAL_IMAGES',
-    song: 'HIMNO',
-    next: 2,
-    prev: null
-  },
-  {
-    id: 2,
-    name: 'initialTwo',
-    type: moduleType.general,
-    texts: 'INITIAL_TEXT_2',
-    images: 'INITIAL_IMAGES_TWO',
-    song: 'DOOR',
-    next: null,
-    prev: 1
-  }
-]
+import schemes from '@game/configs/schemes'
 
 class ModuleFactory {
   static async build ({ id, params = {} }) {
