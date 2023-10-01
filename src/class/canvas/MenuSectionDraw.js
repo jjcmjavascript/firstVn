@@ -18,12 +18,12 @@ class MenuSectionDraw {
     ctx.lineTo(gameSectionDimesions.width, height)
     ctx.lineTo(0, height)
     ctx.lineTo(0, gameSectionDimesions.height)
-    ctx.fillStyle = colors.silver
+    ctx.fillStyle = colors.silverTwo
     // Llena el menu
     ctx.fill()
     // Colorea el borde del menu
-    ctx.strokeStyle = colors.silverThree
-    ctx.lineWidth = 5
+    ctx.strokeStyle = colors.purpleThree
+    ctx.lineWidth = 10
     ctx.stroke()
   }
 }
