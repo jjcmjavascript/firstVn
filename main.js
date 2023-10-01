@@ -113,8 +113,6 @@ import ModuleFactory from '@game/ModuleFactory'
         })
       }
 
-      starts.forEach((star) => star.move())
-
       menuSection.draw()
       leftButton.draw()
       rightButton.draw()
@@ -128,6 +126,8 @@ import ModuleFactory from '@game/ModuleFactory'
           height: image.height
         })
       })
+
+      starts.forEach((star) => star.move())
 
       text && text.draw({ manager: canvasManager })
     }
