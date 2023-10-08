@@ -13,6 +13,10 @@ class ModuleTexts {
     return this.currentPosition >= this.texts.length - 1
   }
 
+  get isBegining () {
+    return this.currentPosition <= 0
+  }
+
   get currentText () {
     return this.texts[this.currentPosition]
   }

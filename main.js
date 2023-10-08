@@ -79,7 +79,10 @@ import AudioMaker from '@class/AudioMaker'
         clientX: event.clientX,
         clientY: event.clientY
       })) {
-        console.error('leftButton button')
+        clickSound.pause()
+        clickSound.currentTime = 0
+        clickSound.play()
+        await game.prevModule()
       }
 
       if (rightButton.mouseInside({

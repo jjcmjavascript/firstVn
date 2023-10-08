@@ -40,7 +40,10 @@ class Game {
   async prevModule () {
     const prevModuleId = this.currentModule.prev
 
-    if (prevModuleId) {
+    if (!this.currentModule.texts?.isBegining) {
+      this.currentModule.texts.prev()
+    } else if (prevModuleId) {
+      await this.stopCurrentModule()
       await this.pushModule({ id: prevModuleId })
     }
   }

@@ -11,7 +11,7 @@ export default [
     type: moduleType.general,
     texts: 'INITIAL_TEXT',
     images: 'INITIAL_IMAGES',
-    song: 'HIMNO',
+    song: null,
     next: 2,
     prev: null
   },

@@ -20,7 +20,6 @@ class ModuleAudio {
   static async getInstace ({ url, loader }) {
     const instance = new ModuleAudio({ url: null, loader })
     await instance.load({ url, loader })
-    console.log(instance)
 
     return instance
   }
