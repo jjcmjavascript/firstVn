@@ -1,0 +1,6 @@
+// GAME EVENTS
+const CHANGING_MODULE = 'GAME/CHANGING_MODULE'
+
+export default {
+  CHANGING_MODULE
+}

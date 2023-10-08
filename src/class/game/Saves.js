@@ -1,6 +1,6 @@
 class Saves {
   contrunctor () {
-    this.list = []
+    this.list = new Map()
   }
 
   loadLocalSave () {

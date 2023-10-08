@@ -1,3 +1,4 @@
+import prototypes from '@utils/prototypes'
 import CanvasManager from '@canvas/CanvasManager'
 import CanvasListeners from '@canvas/CanvasListeners'
 import colors from '@utils/colors'
@@ -10,6 +11,9 @@ import RightButtonDraw from '@canvas/RightButtonDraw'
 import Game from '@game/Game'
 import ModuleFactory from '@game/ModuleFactory'
 import AudioMaker from '@class/AudioMaker'
+import { v4 as uuid } from 'uuid'
+import Saves from '@game/Saves'
+import Events from '@game/Events'
 
 (async function () {
   let resourcesLoaded = false
@@ -24,7 +28,9 @@ import AudioMaker from '@class/AudioMaker'
   /*     Load Basic Resources */
   /****************************/
   Game.getInstace({
-    moduleFactory: ModuleFactory
+    moduleFactory: ModuleFactory,
+    saves: new Saves({ idGenerator: uuid }),
+    events: new Events({ idGenerator: uuid })
   })
     .then((gameInstance) => {
       game = gameInstance
