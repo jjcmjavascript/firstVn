@@ -17,7 +17,6 @@ export default {
     texts: null,
     images: 'INITIAL_IMAGES',
     song: null,
-    options: [1, 4],
     next: null,
     prev: 1
   },

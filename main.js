@@ -6,6 +6,7 @@ import MenuSectionDraw from '@canvas/MenuSectionDraw'
 import LeftButtonDraw from '@canvas/LeftButtonDraw'
 import Star from '@class/canvas/StarDraw'
 import Text from '@canvas/Text'
+import CanvasTextOptions from '@canvas/CanvasTextOptions'
 import Loading from '@canvas/Loading'
 import RightButtonDraw from '@canvas/RightButtonDraw'
 import Game from '@game/Game'
@@ -60,6 +61,17 @@ import GameEvents from '@game/GameEvents'
     fillStyle: colors.black,
     textAlignment: 'left',
     canvasManager
+  })
+
+  const optionsText = new CanvasTextOptions({
+    text: [],
+    x: canvasManager.width * 0.01,
+    size: 20,
+    y: canvasManager.buttonSectionPosition.y + 20,
+    strokeStyle: colors.black,
+    textAlignment: 'left',
+    canvasManager,
+    stroke: true
   })
 
   const starts = new Array(30).fill(0).map(() => new Star({
@@ -131,6 +143,10 @@ import GameEvents from '@game/GameEvents'
       // GAME DRAWS
       historyText.withModule({ module: currentModule })
       historyText.draw()
+
+      // optionsText.withModule({ module: currentModule })
+      // optionsText.draw()
+
       currentModuleImages.forEach((image, i) => {
         canvasManager.insertImage({
           image: image.image,

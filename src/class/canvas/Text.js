@@ -8,6 +8,7 @@ class Text {
     font = 'Arial',
     textBaseline = 'middle',
     stroke = false,
+    strokeStyle = 'black',
     fillStyle = 'white',
     canvasManager,
     module
@@ -25,45 +26,11 @@ class Text {
     this.fillStyle = fillStyle
     this.size = size
     this.module = module
+    this.strokeStyle = strokeStyle
   }
 
   get fontFormat () {
     return `${this.size}px ${this.font}`
-  }
-
-  setSize (size) {
-    this.size = size
-    return this
-  }
-
-  setText (text) {
-    this.text = text
-    return this
-  }
-
-  setX (x) {
-    this.x = x
-    return this
-  }
-
-  setY (y) {
-    this.y = y
-    return this
-  }
-
-  setTextAlignment (textAlignment) {
-    this.textAlignment = textAlignment
-    return this
-  }
-
-  setFont (font) {
-    this.font = font
-    return this
-  }
-
-  setTextBaseline (textBaseline) {
-    this.textBaseline = textBaseline
-    return this
   }
 
   withModule ({ module }) {
@@ -78,6 +45,8 @@ class Text {
     manager.context.font = this.fontFormat
     manager.context.textBaseline = this.textBaseline
     manager.context.fillStyle = this.fillStyle
+    manager.context.strokeStyle = this.strokeStyle
+
     this.stroke ? manager.context.strokeText(this.text, this.x, this.y) : manager.context.fillText(this.text, this.x, this.y)
   }
 }

@@ -1,8 +1,7 @@
 import Text from '@canvas/Text'
-
 class CanvasTextOptions extends Text {
   constructor ({
-    text = '',
+    text = [],
     x = 0,
     y = 0,
     textAlignment = 'center',
@@ -12,8 +11,34 @@ class CanvasTextOptions extends Text {
     stroke = false,
     fillStyle = 'white',
     canvasManager,
-    module
+    module,
+    strokeStyle
   }) {
-    super({ text, x, y, textAlignment, size, font, textBaseline, stroke, fillStyle, canvasManager, module })
+    super({ text, x, y, textAlignment, size, font, textBaseline, stroke, fillStyle, canvasManager, module, strokeStyle })
+  }
+
+  withModule ({ module }) {
+    this.module = module
+    this.text = module.currentTexts
+    return this
+  }
+
+  draw () {
+    const manager = this.canvasManager
+    manager.context.textAlign = this.textAlignment
+    manager.context.font = this.fontFormat
+    manager.context.textBaseline = this.textBaseline
+    manager.context.fillStyle = this.fillStyle
+    manager.context.strokeStyle = this.strokeStyle
+
+    this.text.forEach((text, index) => {
+      const marginTop = index === 0 ? 0 : index * this.size + (index * manager.height * 0.02)
+
+      this.stroke
+        ? manager.context.strokeText(text, this.x, this.y + marginTop)
+        : manager.context.fillText(text, this.x, this.y + marginTop)
+    })
   }
 }
+
+export default CanvasTextOptions
