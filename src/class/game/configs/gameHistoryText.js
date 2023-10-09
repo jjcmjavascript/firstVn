@@ -1,17 +1,21 @@
-export const INITIAL_TEXT = (params) => [
+import moduleNames from '@game/configs/gameModuleNames'
+
+export const INITIAL = (params) => [
   'Abre sus ojos...',
   'donde estoy? solo recuerdo que estaba en medio de [...]',
-  'y ahora estoy en un lugar desconocido',
+  'y ahora estoy en un lugar desconocido'
+]
+
+export const GETING_OUT = (params) => [
   'debo encontrar la salida'
 ]
 
-export const INITIAL_TEXT_2 = (params) => [
-  'Observas tu reflejo en el espejo',
-  '...',
-  'Acaso he renacido?'
+export const GO_TO_HELL_ONE = (params) => [
+  'estoy en el infierno'
 ]
 
 export default {
-  INITIAL_TEXT,
-  INITIAL_TEXT_2
+  [moduleNames.INITIAL]: INITIAL,
+  [moduleNames.GETING_OUT]: GETING_OUT,
+  [moduleNames.GO_TO_HELL_ONE]: GO_TO_HELL_ONE
 }

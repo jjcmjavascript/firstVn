@@ -9,8 +9,12 @@ class Text {
     textBaseline = 'middle',
     stroke = false,
     fillStyle = 'white',
-    manager
+    canvasManager,
+    module
   }) {
+    if (!canvasManager) throw new Error('canvasManager is required')
+    this.canvasManager = canvasManager
+
     this.text = text
     this.x = x
     this.y = y
@@ -20,7 +24,7 @@ class Text {
     this.stroke = stroke
     this.fillStyle = fillStyle
     this.size = size
-    this.manager = manager
+    this.module = module
   }
 
   get fontFormat () {
@@ -62,7 +66,14 @@ class Text {
     return this
   }
 
-  draw ({ manager = this.manager }) {
+  withModule ({ module }) {
+    this.module = module
+    this.text = module.currentText
+    return this
+  }
+
+  draw () {
+    const manager = this.canvasManager
     manager.context.textAlign = this.textAlignment
     manager.context.font = this.fontFormat
     manager.context.textBaseline = this.textBaseline

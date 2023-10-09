@@ -41,16 +41,27 @@ import GameEvents from '@game/GameEvents'
         })
     })
 
-  // sections and items
+  /**********************************/
+  /*          Items Instances       */
+  /**********************************/
   const loading = new Loading({
     canvasManager,
     colors,
-    text: new Text({
-    })
+    text: new Text({ canvasManager })
   })
   const menuSection = new MenuSectionDraw({ canvasManager, colors })
   const leftButton = new LeftButtonDraw({ canvasManager, colors })
   const rightButton = new RightButtonDraw({ canvasManager, colors })
+  const historyText = new Text({
+    text: '',
+    x: canvasManager.width * 0.01,
+    size: 20,
+    y: canvasManager.buttonSectionPosition.y + 20,
+    fillStyle: colors.black,
+    textAlignment: 'left',
+    canvasManager
+  })
+
   const starts = new Array(30).fill(0).map(() => new Star({
     canvasManager,
     x: Math.random() * canvasManager.width,
@@ -102,7 +113,6 @@ import GameEvents from '@game/GameEvents'
   /*          Main Loop             */
   /*          Draw                  */
   /**********************************/
-  let text = null
   const context = canvasManager.context
   const draw = () => {
     requestAnimationFrame(draw)
@@ -111,25 +121,16 @@ import GameEvents from '@game/GameEvents'
     if (!resourcesLoaded) {
       loading.draw()
     } else {
+      const currentModule = game.currentModule
       const currentModuleImages = game.currentModule.currentImages
-      const currentModuleTexts = game.currentModule.currentTexts
-      const currentModuleText = game.currentModule.currentText
-
-      if (!text || (text && text.text !== currentModuleText)) {
-        text = new Text({
-          text: currentModuleText,
-          x: canvasManager.width * 0.01,
-          size: 20,
-          y: canvasManager.buttonSectionPosition.y + 20,
-          fillStyle: colors.black,
-          textAlignment: 'left'
-        })
-      }
 
       menuSection.draw()
       leftButton.draw()
       rightButton.draw()
 
+      // GAME DRAWS
+      historyText.withModule({ module: currentModule })
+      historyText.draw()
       currentModuleImages.forEach((image, i) => {
         canvasManager.insertImage({
           image: image.image,
@@ -141,8 +142,6 @@ import GameEvents from '@game/GameEvents'
       })
 
       starts.forEach((star) => star.move())
-
-      text && text.draw({ manager: canvasManager })
     }
   }
 
