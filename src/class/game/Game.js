@@ -3,8 +3,10 @@ class Game {
    * @param {object} param
    * @param {ModuleFactory} param.moduleFactory
    */
-  constructor ({ moduleFactory }) {
+  constructor ({ moduleFactory, saveManager, eventManager }) {
     this.moduleFactory = moduleFactory
+    this.saveManager = saveManager
+    this.eventManager = eventManager
     this.modules = []
   }
 
@@ -48,8 +50,8 @@ class Game {
     }
   }
 
-  static async getInstace ({ moduleFactory }) {
-    const instance = new Game({ moduleFactory })
+  static async getInstace ({ moduleFactory, saveManager, eventManager }) {
+    const instance = new Game({ moduleFactory, saveManager, eventManager })
     await instance.pushModule({ id: 1 })
 
     return instance

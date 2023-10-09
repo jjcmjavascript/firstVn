@@ -13,7 +13,7 @@ import ModuleFactory from '@game/ModuleFactory'
 import AudioMaker from '@class/AudioMaker'
 import { v4 as uuid } from 'uuid'
 import Saves from '@game/Saves'
-import Events from '@game/Events'
+import GameEvents from '@game/GameEvents'
 
 (async function () {
   let resourcesLoaded = false
@@ -29,8 +29,8 @@ import Events from '@game/Events'
   /****************************/
   Game.getInstace({
     moduleFactory: ModuleFactory,
-    saves: new Saves({ idGenerator: uuid }),
-    events: new Events({ idGenerator: uuid })
+    saveManager: new Saves({ idGenerator: uuid }),
+    eventManager: new GameEvents({ idGenerator: uuid })
   })
     .then((gameInstance) => {
       game = gameInstance
