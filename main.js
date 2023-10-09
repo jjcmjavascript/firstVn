@@ -68,11 +68,6 @@ import Events from '@game/Events'
     name: 'mousemove',
     type: 'mousemove',
     callback: function (event) {
-      const result = leftButton.mouseInside({
-        clientX: event.clientX,
-        clientY: event.clientY
-      })
-
       input.value = `X: ${event.clientX - canvasManager.canvas.getBoundingClientRect().left} Y: ${event.clientY - canvasManager.canvas.getBoundingClientRect().top}`
     }
   })
@@ -108,7 +103,7 @@ import Events from '@game/Events'
   /*          Draw                  */
   /**********************************/
   let text = null
-
+  const context = canvasManager.context
   const draw = () => {
     requestAnimationFrame(draw)
     canvasManager.clearRect()
