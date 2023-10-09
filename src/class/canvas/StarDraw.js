@@ -35,7 +35,7 @@ class StartDraw {
 
   move () {
     this.y += this.speed
-    if (this.y > this.canvasManager.gameSectionDimesions.height + 50) {
+    if (this.y > this.canvasManager.gameSectionDimesions.height) {
       this.y = 0
       this.x = Math.random() * this.canvasManager.width
     }

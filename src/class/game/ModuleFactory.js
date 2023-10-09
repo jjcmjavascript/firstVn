@@ -11,12 +11,12 @@ import schemes from '@game/configs/schemes'
 
 class ModuleFactory {
   static async build ({ id, params = {} }) {
-    const scheme = schemes.find((module) => module.id === id)
+    const scheme = schemes.findValue((_, module) => module.id === id)
     const textsResult = scheme.texts
       ? GameTextSelector.getHistoryTextByName({ name: scheme.texts, params })
       : null
     const imagesResult = scheme.images
-      ? await GameImageSelector.getImagesByName({ name: scheme.images, params })
+      ? GameImageSelector.getImagesByName({ name: scheme.images, params })
       : null
     const songResult = scheme.song
       ? GameAudioSelector.getAudioByName({ name: scheme.song, params })

@@ -6,6 +6,7 @@ import MenuSectionDraw from '@canvas/MenuSectionDraw'
 import LeftButtonDraw from '@canvas/LeftButtonDraw'
 import Star from '@class/canvas/StarDraw'
 import Text from '@canvas/Text'
+import CanvasTextOptions from '@canvas/CanvasTextOptions'
 import Loading from '@canvas/Loading'
 import RightButtonDraw from '@canvas/RightButtonDraw'
 import Game from '@game/Game'
@@ -13,7 +14,7 @@ import ModuleFactory from '@game/ModuleFactory'
 import AudioMaker from '@class/AudioMaker'
 import { v4 as uuid } from 'uuid'
 import Saves from '@game/Saves'
-import Events from '@game/Events'
+import GameEvents from '@game/GameEvents'
 
 (async function () {
   let resourcesLoaded = false
@@ -29,8 +30,8 @@ import Events from '@game/Events'
   /****************************/
   Game.getInstace({
     moduleFactory: ModuleFactory,
-    saves: new Saves({ idGenerator: uuid }),
-    events: new Events({ idGenerator: uuid })
+    saveManager: new Saves({ idGenerator: uuid }),
+    eventManager: new GameEvents({ idGenerator: uuid })
   })
     .then((gameInstance) => {
       game = gameInstance
@@ -41,16 +42,38 @@ import Events from '@game/Events'
         })
     })
 
-  // sections and items
+  /**********************************/
+  /*          Items Instances       */
+  /**********************************/
   const loading = new Loading({
     canvasManager,
     colors,
-    text: new Text({
-    })
+    text: new Text({ canvasManager })
   })
   const menuSection = new MenuSectionDraw({ canvasManager, colors })
   const leftButton = new LeftButtonDraw({ canvasManager, colors })
   const rightButton = new RightButtonDraw({ canvasManager, colors })
+  const historyText = new Text({
+    text: '',
+    x: canvasManager.width * 0.01,
+    size: 20,
+    y: canvasManager.buttonSectionPosition.y + 20,
+    fillStyle: colors.black,
+    textAlignment: 'left',
+    canvasManager
+  })
+
+  const optionsText = new CanvasTextOptions({
+    text: [],
+    x: canvasManager.width * 0.01,
+    size: 20,
+    y: canvasManager.buttonSectionPosition.y + 20,
+    strokeStyle: colors.black,
+    textAlignment: 'left',
+    canvasManager,
+    stroke: true
+  })
+
   const starts = new Array(30).fill(0).map(() => new Star({
     canvasManager,
     x: Math.random() * canvasManager.width,
@@ -68,11 +91,6 @@ import Events from '@game/Events'
     name: 'mousemove',
     type: 'mousemove',
     callback: function (event) {
-      const result = leftButton.mouseInside({
-        clientX: event.clientX,
-        clientY: event.clientY
-      })
-
       input.value = `X: ${event.clientX - canvasManager.canvas.getBoundingClientRect().left} Y: ${event.clientY - canvasManager.canvas.getBoundingClientRect().top}`
     }
   })
@@ -107,8 +125,7 @@ import Events from '@game/Events'
   /*          Main Loop             */
   /*          Draw                  */
   /**********************************/
-  let text = null
-
+  const context = canvasManager.context
   const draw = () => {
     requestAnimationFrame(draw)
     canvasManager.clearRect()
@@ -116,24 +133,19 @@ import Events from '@game/Events'
     if (!resourcesLoaded) {
       loading.draw()
     } else {
+      const currentModule = game.currentModule
       const currentModuleImages = game.currentModule.currentImages
-      const currentModuleTexts = game.currentModule.currentTexts
-      const currentModuleText = game.currentModule.currentText
-
-      if (!text || (text && text.text !== currentModuleText)) {
-        text = new Text({
-          text: currentModuleText,
-          x: canvasManager.width * 0.01,
-          size: 20,
-          y: canvasManager.buttonSectionPosition.y + 20,
-          fillStyle: colors.black,
-          textAlignment: 'left'
-        })
-      }
 
       menuSection.draw()
       leftButton.draw()
       rightButton.draw()
+
+      // GAME DRAWS
+      historyText.withModule({ module: currentModule })
+      historyText.draw()
+
+      // optionsText.withModule({ module: currentModule })
+      // optionsText.draw()
 
       currentModuleImages.forEach((image, i) => {
         canvasManager.insertImage({
@@ -146,8 +158,6 @@ import Events from '@game/Events'
       })
 
       starts.forEach((star) => star.move())
-
-      text && text.draw({ manager: canvasManager })
     }
   }
 

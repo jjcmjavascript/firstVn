@@ -2,26 +2,26 @@ class Module {
   /**
    * @param {*} param
    * @param {int} param.id
-   * @param {String} param.name
    * @param {ModuleSong} param.song
    * @param {ModuleTexts} param.texts
    * @param {ModuleImages} param.images
    * @param {Array[String]} param.executionOrder
    */
-  constructor ({ id, images, name, song, texts, next, prev, executionOrder = ['images', 'song', 'texts'] }) {
-    if (!name) throw new Error('name is required')
-    this.name = name
-
+  constructor ({ id, images, song, texts, next, prev, type, executionOrder = ['images', 'song', 'texts'] }) {
     if (!id) throw new Error('id is required')
     this.id = id
+
+    if (!type) throw new Error('type is required')
+    this.type = type
 
     this.images = images
     this.song = song
     this.texts = texts
     this.executionOrder = executionOrder
-    this.auto()
     this.next = next
     this.prev = prev
+
+    this.auto()
   }
 
   auto () {
