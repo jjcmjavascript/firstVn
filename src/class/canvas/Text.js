@@ -10,8 +10,7 @@ class Text {
     stroke = false,
     strokeStyle = 'black',
     fillStyle = 'white',
-    canvasManager,
-    module
+    canvasManager
   }) {
     if (!canvasManager) throw new Error('canvasManager is required')
     this.canvasManager = canvasManager
@@ -25,17 +24,23 @@ class Text {
     this.stroke = stroke
     this.fillStyle = fillStyle
     this.size = size
-    this.module = module
     this.strokeStyle = strokeStyle
+  }
+
+  setX (x) {
+    this.x = x
+  }
+
+  setY (y) {
+    this.y = y
   }
 
   get fontFormat () {
     return `${this.size}px ${this.font}`
   }
 
-  withModule ({ module }) {
-    this.module = module
-    this.text = module.currentText
+  setText ({ text }) {
+    this.text = text
     return this
   }
 

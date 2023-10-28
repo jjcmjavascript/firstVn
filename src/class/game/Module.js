@@ -20,12 +20,6 @@ class Module {
     this.executionOrder = executionOrder
     this.next = next
     this.prev = prev
-
-    this.auto()
-  }
-
-  auto () {
-    this.song?.play()
   }
 
   stop () {
@@ -48,8 +42,26 @@ class Module {
     return this.song?.song
   }
 
-  async execute () {
+  async play ({
+    canvasManager,
+    canvasTextShower
+  }) {
+    this.song?.play()
+    this.images?.play({
+      canvasManager
+    })
+    this.texts?.play({
+      canvasTextShower
+    })
+  }
 
+  prevModule () {
+    if (this.texts && !this.texts?.isBegining) {
+      this.texts.prev()
+      return
+    }
+
+    return this.prev
   }
 }
 

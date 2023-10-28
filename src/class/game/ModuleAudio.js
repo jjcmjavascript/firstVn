@@ -7,6 +7,7 @@ class ModuleAudio {
   constructor ({ url, loader }) {
     this.urls = url
     this.song = null
+    this.executed = false
   }
 
   async load ({ url, loader }) {
@@ -25,7 +26,10 @@ class ModuleAudio {
   }
 
   play () {
-    this.song.play()
+    if (!this.executed && this.song.paused) {
+      this.song.play()
+      this.executed = true
+    }
   }
 
   stop () {

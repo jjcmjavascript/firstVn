@@ -11,15 +11,13 @@ class CanvasTextOptions extends Text {
     stroke = false,
     fillStyle = 'white',
     canvasManager,
-    module,
     strokeStyle
   }) {
-    super({ text, x, y, textAlignment, size, font, textBaseline, stroke, fillStyle, canvasManager, module, strokeStyle })
+    super({ text, x, y, textAlignment, size, font, textBaseline, stroke, fillStyle, canvasManager, strokeStyle })
   }
 
-  withModule ({ module }) {
-    this.module = module
-    this.text = module.currentTexts
+  setText ({ text }) {
+    this.text = text
     return this
   }
 

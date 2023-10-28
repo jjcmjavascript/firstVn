@@ -6,38 +6,38 @@ class ModuleImages {
    * @param {Array[0].url} params.objects.url
    * @param {Array[0].x} params.objects.x
    * @param {Array[0].y} params.objects.y
-   * @param {AudioMaker} params.loader
+   * @param {Array[0].width} params.objects.width
+   * @param {Array[0].height} params.objects.height
    */
-  constructor ({ urls, loader }) {
+  constructor ({ urls }) {
     this.urls = urls
-
-    /**
-     * @type {Array[Objects]}
-     * @property {String} image
-     * @property {Number} x
-     * @property {Number} y
-     */
     this.images = []
   }
 
   async load ({ urls, loader }) {
-    let i = 0
-    const length = urls.length
-    while (i < length) {
-      const image = await loader.load({ url: urls[i].url })
+    const promisesResults =
+      await Promise.all(Object.values(urls).map(imageOptionObject => loader.load({ url: imageOptionObject.url })))
+
+    promisesResults.forEach((imageResult, i) =>
       this.images.push({
-        image,
+        image: imageResult,
         x: urls[i].x,
         y: urls[i].y,
         width: urls[i].width,
         height: urls[i].height
-      })
-      i++
-    }
+      }))
   }
 
-  async execute () {
-    console.log(this)
+  async play ({ canvasManager }) {
+    this.images.forEach((image) => {
+      canvasManager.insertImage({
+        image: image.image,
+        x: image.x,
+        y: image.y,
+        width: image.width,
+        height: image.height
+      })
+    })
   }
 
   static async getInstace ({ urls, loader }) {

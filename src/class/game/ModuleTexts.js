@@ -33,8 +33,11 @@ class ModuleTexts {
     this.currentPosition--
   }
 
-  async execute () {
-    console.log(this)
+  async play ({
+    canvasTextShower
+  }) {
+    canvasTextShower.setText({ text: this.currentText })
+    canvasTextShower.draw()
   }
 
   static async getInstace ({ texts }) {

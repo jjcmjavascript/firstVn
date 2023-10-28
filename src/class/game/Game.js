@@ -23,6 +23,7 @@ class Game {
   }
 
   async pushModule ({ id }) {
+    console.log('pushModule', id)
     const module = await this.moduleFactory.build({ id })
 
     this.modules.push(module)
@@ -40,11 +41,9 @@ class Game {
   }
 
   async prevModule () {
-    const prevModuleId = this.currentModule.prev
+    const prevModuleId = this.currentModule.prevModule()
 
-    if (!this.currentModule.texts?.isBegining) {
-      this.currentModule.texts.prev()
-    } else if (prevModuleId) {
+    if (prevModuleId) {
       await this.stopCurrentModule()
       await this.pushModule({ id: prevModuleId })
     }
